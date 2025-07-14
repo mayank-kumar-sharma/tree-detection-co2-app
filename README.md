@@ -68,13 +68,6 @@ Example summary after image upload:
 
 ---
 
-## 🧪 Run Locally
-
-```bash
-git clone https://github.com/mayank-kumar-sharma/tree-detection-co2-app.git
-cd tree-detection-co2-app
-pip install -r requirements.txt
-streamlit run app.py
 💬 About the App
 This project aims to demonstrate how AI + satellite imagery can help in environmental monitoring, urban forestry, and carbon sequestration estimation. The app is lightweight, fast, and optimized for practical use cases like:
 
@@ -83,5 +76,19 @@ Estimating green cover in urban areas
 Supporting reforestation monitoring
 
 Educational and research-based analysis
+
+🤝 Acknowledgements
+Ultralytics for YOLOv8
+
+Roboflow for dataset preparation
+
+Streamlit for the UI framework
+
+OpenCV, NumPy, Matplotlib, and the Python open-source ecosystem
+
 ❤️ Made with Love
-<p align="center"> <b>Made with ❤️ by Mayank Kumar Sharma</b><br> 🌱 Empowering environmental insights through AI & satellite vision. </p> ```
+<p align="center">
+  <b>Made with ❤️ by Mayank Kumar Sharma</b><br>
+  🌱 Empowering environmental insights through AI & satellite vision.
+</p>
+
