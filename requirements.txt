@@ -5,3 +5,4 @@ matplotlib
 Pillow
 numpy<2
 pandas
+torch==2.5.1
