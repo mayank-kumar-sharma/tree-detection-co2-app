@@ -16,7 +16,7 @@ st.title("🌳 Tree Detection and CO₂ Estimation")
 st.markdown("""
 Upload a **satellite image** to detect trees, classify them by size (S/M/L), estimate maturity and CO₂ sequestration, and get a CSV report with cropped images.
 
-⚠️ **Note:** Works best with satellite imagery.
+⚠️ **Note:** Works only with satellite imagery.
 
 ---
 """)
