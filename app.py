@@ -22,7 +22,7 @@ Upload a **satellite image** to detect trees, classify them by size (S/M/L), est
 """)
 
 # ===== Load YOLOv8 Detection Model =====
-model = YOLO("detection.pt")  # Replace with your trained model name in root dir
+model = YOLO("deetection.pt")  # Replace with your trained model name in root dir
 
 # ===== Upload Image =====
 uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg", "png"])
