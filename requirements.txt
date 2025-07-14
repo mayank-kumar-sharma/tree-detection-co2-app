@@ -3,5 +3,5 @@ ultralytics==8.1.0
 opencv-python-headless==4.7.0.72
 matplotlib
 Pillow
-numpy
+numpy==1.24.4
 pandas
