@@ -44,7 +44,7 @@ if uploaded_image:
     co2_total = 0
     class_counts = defaultdict(int)
 
-    size_map = {"S": (0, 3000), "M": (3000, 9000), "L": (9001, float("inf"))}  # Adjusted for better accuracy
+    size_map = {"S": (0, 15000), "M": (15000, 25000), "L": (25001, float("inf"))}  # Adjusted for better accuracy
     co2_map = {"S": 10, "M": 20, "L": 30}
     maturity_map = {"S": "likely young", "M": "semi-mature", "L": "mature"}
 
@@ -56,7 +56,7 @@ if uploaded_image:
         crop = image_bgr[y1:y2, x1:x2]
         bbox_area = (x2 - x1) * (y2 - y1)
 
-        size_class = "L" if bbox_area > 9000 else "M" if bbox_area > 3000 else "S"
+        size_class = "L" if bbox_area > 25000 else "M" if bbox_area > 15000 else "S"
         co2 = co2_map[size_class]
         maturity = maturity_map[size_class]
 
