@@ -48,7 +48,7 @@ if uploaded_image:
         fill_color="rgba(255, 0, 0, 0.3)",
         stroke_width=3,
         stroke_color="red",
-        background_image=Image.open(uploaded_image),
+        background_image=uploaded_image,
         height=image.height,
         width=image.width,
         drawing_mode="polygon",
