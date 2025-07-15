@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_drawable_canvas import st_canvas
 import cv2
 import numpy as np
 import pandas as pd
@@ -10,68 +9,67 @@ import shutil
 import matplotlib.pyplot as plt
 from zipfile import ZipFile
 from collections import defaultdict
+from streamlit_drawable_canvas import st_canvas
 from shapely.geometry import Point, Polygon
-import base64
-from io import BytesIO
 
+# === Streamlit App Config ===
 st.set_page_config(page_title="Tree Detection & CO₂ Estimation", layout="centered")
 st.title("🌳 Tree Detection and CO₂ Estimation")
-
 st.markdown("""
-Upload a **satellite image**, draw a polygon to select Region of Interest (ROI), and get tree detection, size (S/M/L), maturity, CO₂ sequestration, and a downloadable report.
+Upload a **satellite image**, draw a polygon to select your region of interest, and get:
+- Detected trees inside that region
+- Size classification (S / M / L)
+- Estimated maturity
+- Yearly CO₂ sequestration per tree
+- Canopy area per tree
+- Downloadable CSV + Cropped images ZIP
 
+⚠️ **Note:** Use satellite images. Trees outside the polygon will be ignored.
 ---
-
-**🔺 Only trees inside the polygon will be processed.**
 """)
 
-# Load YOLO model
-model = YOLO("deetection.pt")  # Your model file
+# === Load Model ===
+model = YOLO("deetection.pt")  # make sure it's in root dir
 
-# Helper: Convert image to base64 URL for canvas
-def image_to_data_url(image):
-    buffered = BytesIO()
-    image.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue()).decode()
-    return f"data:image/png;base64,{img_str}"
-
-uploaded_image = st.file_uploader("📤 Upload Satellite Image", type=["jpg", "jpeg", "png"])
+# === Upload Image ===
+uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image:
     image = Image.open(uploaded_image).convert("RGB")
     image_np = np.array(image)
-    image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
     image_path = "uploaded_image.jpg"
     image.save(image_path)
-    img_url = image_to_data_url(image)
 
-    # Draw Polygon
-    st.subheader("✏️ Draw Polygon ROI")
+    st.image(image, caption="📷 Uploaded Satellite Image", use_container_width=True)
+
+    # === Polygon Drawing Canvas ===
+    st.subheader("✏️ Draw a Polygon to Select ROI (Region of Interest)")
     canvas_result = st_canvas(
         fill_color="rgba(255, 0, 0, 0.3)",
         stroke_width=3,
         stroke_color="red",
-        background_image=img_url,
+        background_image=Image.open(uploaded_image),
         height=image.height,
         width=image.width,
         drawing_mode="polygon",
-        key="canvas",
+        key="canvas"
     )
 
     if canvas_result.json_data and "objects" in canvas_result.json_data:
-        polygons = canvas_result.json_data["objects"]
-        if polygons:
-            polygon_points = polygons[0]["path"]
-            polygon_xy = [(pt[1], pt[2]) for pt in polygon_points if len(pt) == 3]
-            st.success(f"Polygon with {len(polygon_xy)} points received!")
+        objects = canvas_result.json_data["objects"]
+        if objects:
+            polygon_points = objects[0]["path"]
+            polygon_coords = [(pt[1], pt[2]) for pt in polygon_points if pt[0] == "L"]
+            if polygon_coords[0] != polygon_coords[-1]:
+                polygon_coords.append(polygon_coords[0])  # close polygon
+            polygon = Polygon(polygon_coords)
 
-            # Convert to Shapely polygon
-            roi_polygon = Polygon(polygon_xy)
-
-            # Run detection
+            # === Inference ===
             results = model(image_path)[0]
             boxes = results.boxes.xyxy.cpu().numpy().astype(int)
+            image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
 
+            # === Processing ===
             output_data = []
             canopy_areas = []
             co2_total = 0
@@ -86,11 +84,9 @@ if uploaded_image:
 
             for i, box in enumerate(boxes):
                 x1, y1, x2, y2 = box
-                center_x = (x1 + x2) // 2
-                center_y = (y1 + y2) // 2
-                center_point = Point(center_x, center_y)
-
-                if not roi_polygon.contains(center_point):
+                center_x = (x1 + x2) / 2
+                center_y = (y1 + y2) / 2
+                if not polygon.contains(Point(center_x, center_y)):
                     continue
 
                 crop = image_bgr[y1:y2, x1:x2]
@@ -108,53 +104,55 @@ if uploaded_image:
                 canopy_areas.append(bbox_area)
 
                 output_data.append({
-                    "Tree #": len(output_data)+1,
+                    "Tree #": i + 1,
                     "Size": size_class,
                     "Maturity": maturity,
                     "CO₂ (kg/year)": co2,
                     "Canopy Area (px²)": bbox_area
                 })
 
-            # Show results
-            st.success(f"✅ Trees inside polygon: {len(output_data)}")
-            st.info(f"Estimated Total CO₂: {co2_total:.2f} kg/year")
-            st.write(f"Average Canopy Area: {np.mean(canopy_areas) if canopy_areas else 0:.2f} px²")
+            # === Results ===
+            if output_data:
+                st.success(f"✅ Total Trees Detected in Polygon: {len(output_data)}")
+                st.info(f"🌱 Total Estimated CO₂: {co2_total:.2f} kg/year")
+                st.write(f"🟩 Average Canopy Area: {round(np.mean(canopy_areas), 2)} px²")
 
-            # Pie Chart
-            fig, ax = plt.subplots()
-            ax.pie(class_counts.values(), labels=class_counts.keys(), autopct="%1.1f%%", startangle=90)
-            ax.axis("equal")
-            st.pyplot(fig)
+                # Pie chart
+                fig, ax = plt.subplots()
+                ax.pie(class_counts.values(), labels=class_counts.keys(), autopct="%1.1f%%", startangle=90)
+                ax.axis("equal")
+                st.pyplot(fig)
 
-            # DataFrame
-            df = pd.DataFrame(output_data)
-            st.dataframe(df)
+                # CSV
+                df = pd.DataFrame(output_data)
+                st.dataframe(df)
 
-            # CSV + ZIP
-            csv_path = "tree_report.csv"
-            df.to_csv(csv_path, index=False)
+                csv_path = "tree_report.csv"
+                df.to_csv(csv_path, index=False)
 
-            zip_path = "tree_report_package.zip"
-            with ZipFile(zip_path, 'w') as zipf:
-                zipf.write(csv_path)
-                for file in os.listdir(crop_dir):
-                    zipf.write(os.path.join(crop_dir, file), arcname=os.path.join("tree_crops", file))
+                # ZIP
+                zip_path = "tree_report_package.zip"
+                with ZipFile(zip_path, 'w') as zipf:
+                    zipf.write(csv_path)
+                    for file_name in os.listdir(crop_dir):
+                        zipf.write(os.path.join(crop_dir, file_name), arcname=os.path.join("tree_crops", file_name))
 
-            with open(zip_path, "rb") as f:
-                st.download_button("📥 Download ZIP Report", f, file_name="tree_report_package.zip")
+                with open(zip_path, "rb") as f:
+                    st.download_button("📥 Download ZIP Report", f, file_name="tree_report_package.zip")
 
-            # Cleanup
-            shutil.rmtree(crop_dir)
-            os.remove(csv_path)
-            os.remove(zip_path)
-            os.remove(image_path)
-
+                shutil.rmtree(crop_dir)
+                os.remove(csv_path)
+                os.remove(zip_path)
+                os.remove(image_path)
+            else:
+                st.warning("⚠️ No trees found inside the selected region.")
         else:
-            st.warning("⚠️ Please draw a polygon.")
+            st.warning("⚠️ Please draw a polygon on the image.")
     else:
-        st.warning("⚠️ Use the tool above to draw a region before continuing.")
+        st.warning("🛑 Waiting for polygon to be drawn.")
 
 # Footer
 st.markdown("---")
 st.markdown("<center>Made with ❤️ by Mayank Kumar Sharma</center>", unsafe_allow_html=True)
+
 
