@@ -28,12 +28,16 @@ model = YOLO("deetection.pt")  # Replace with your trained model name in root di
 uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image:
-    image = Image.open(uploaded_image)
+    image = Image.open(uploaded_image).convert("RGB")
+
+    # ✅ Resize image to standard size for consistent detection
+    image = image.resize((1024, 1024))  # You can change to (1280, 1280) if needed
+
     image_np = np.array(image)
     image_path = "uploaded_image.jpg"
     image.save(image_path)
-    st.image(image, caption="📷 Uploaded Satellite Image", use_container_width=True)
 
+    st.image(image, caption="📷 Uploaded Satellite Image", use_container_width=True)
 
     # ===== Inference =====
     results = model(image_path)[0]
