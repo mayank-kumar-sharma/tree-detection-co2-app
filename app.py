@@ -30,15 +30,14 @@ uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg
 if uploaded_image:
     image = Image.open(uploaded_image).convert("RGB")
 
-    # Resize only if too small or too large, and preserve aspect ratio
+    # Resize only if image is too large, maintain quality (Pillow >=10)
     max_dim = 1600
     if max(image.size) > max_dim:
-        image.thumbnail((max_dim, max_dim), Image.ANTIALIAS)  # Keeps aspect ratio
+        image.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
 
     image_np = np.array(image)
     image_path = "uploaded_image.jpg"
     image.save(image_path)
-
     st.image(image, caption="📷 Uploaded Satellite Image", use_container_width=True)
 
     # ===== Inference =====
