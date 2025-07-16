@@ -28,7 +28,6 @@ model = YOLO("deetection.pt")  # Replace with your trained model name in root di
 uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image:
-    if uploaded_image:
     image = Image.open(uploaded_image).convert("RGB")
 
     # Resize only if too small or too large, and preserve aspect ratio
