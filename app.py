@@ -31,7 +31,7 @@ if uploaded_image:
     image = Image.open(uploaded_image).convert("RGB")
 
     # Resize only if image is too large, maintain quality (Pillow >=10)
-    max_dim = 5000
+    max_dim = 10000
     if max(image.size) > max_dim:
         image.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
 
