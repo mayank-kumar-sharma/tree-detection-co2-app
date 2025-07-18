@@ -1,94 +1,101 @@
-# 🌳 Tree Detection and CO₂ Estimation App
+# 🌳 Tree Detection & CO₂ Estimation App
 
-This Streamlit-powered application enables users to upload **satellite imagery** and automatically:
+This Streamlit-based application enables users to upload **satellite images** and automatically:
 
-- Detect trees
-- Classify each tree by **size** (Small / Medium / Large)
-- Estimate tree **maturity**
-- Calculate **CO₂ sequestration**
-- Generate a **CSV report** and provide cropped tree images in a downloadable ZIP
-
----
-
-## 🚀 Features
-
-✅ **Tree Detection**  
-Uses a YOLOv8 model trained on high-resolution satellite images to accurately detect individual tree canopies.
-
-📏 **Size Classification**  
-Each detected tree is classified into one of three categories based on its canopy (bounding box) area:
-
-| Size | Canopy Area (px²)     | CO₂ Estimate (kg/year) | Maturity       |
-|------|------------------------|------------------------|----------------|
-| S    | 0 – 400,000            | 10                     | Likely Young   |
-| M    | 400,001 – 800,000      | 20                     | Semi-Mature    |
-| L    | 800,001 and above      | 30                     | Mature         |
-
-📊 **Summary Outputs**
-
-- 🌲 **Total Trees Detected**
-- 🌱 **Average Canopy Area**
-- 🌍 **Total Estimated CO₂ Sequestration**
-- 📈 **Pie Chart** for tree size distribution
-
-📁 **ZIP Download**  
-Includes:
-- `tree_report.csv` — details of each tree (size, maturity, CO₂, canopy area)
-- A folder of cropped images for each detected tree
+- Detect trees using a YOLOv8 model
+- Classify them into Small (S), Medium (M), or Large (L) sizes using **device-independent area ratio**
+- Estimate **tree maturity** and **CO₂ sequestration**
+- Generate a downloadable report with cropped tree images and structured CSV data
 
 ---
 
 ## 🔗 Live App
 
-👉 [Click here to launch the app](https://tree-detection-co2-app-bgu6yqhyf3hb7rqvm4uncw.streamlit.app/)
+👉 [Launch Now](https://tree-detection-co2-app-bgu6yqhyf3hb7rqvm4uncw.streamlit.app/)
+
+---
+
+## 🧠 How It Works
+
+1. **Upload Satellite Image** (JPG, PNG)
+2. App uses a **YOLOv8 model** (`deetection.pt`) to detect trees
+3. Each bounding box is classified by **relative area ratio** to the entire image:
+   - `S` (Small): Area ratio `< 1%`
+   - `M` (Medium): Area ratio `1–2%`
+   - `L` (Large): Area ratio `> 2%`
+4. App estimates:
+   - **Maturity**
+   - **CO₂ Sequestration Potential**
+5. App generates:
+   - A **summary table**
+   - A **pie chart** of size distribution
+   - A **ZIP file** containing:
+     - `tree_report.csv`
+     - Cropped tree images sorted by class
+
+---
+
+## 📏 Size Classification & CO₂ Mapping
+
+| Size Class | Area Ratio      | CO₂ Estimate (kg/year) | Maturity       |
+|------------|------------------|------------------------|----------------|
+| S          | `< 1%`           | 10                     | Likely Young   |
+| M          | `1–2%`           | 20                     | Semi-Mature    |
+| L          | `> 2%`           | 30                     | Mature         |
+
+This dynamic method ensures consistent results **across all devices** regardless of screen resolution or image size.
+
+---
+
+## 📁 Download Package Includes
+
+- **`tree_report.csv`** — Detailed table with tree number, size, maturity, CO₂ estimate, and canopy area.
+- **Cropped Tree Images** — Each saved as `tree_#_size.jpg` inside `tree_crops/`.
+
+All files are bundled into a single **ZIP file**, downloadable directly from the app.
 
 ---
 
 ## 🛠 Tech Stack
 
+- **Model**: YOLOv8 via Ultralytics
 - **Frontend**: Streamlit
-- **Model**: YOLOv8 (Ultralytics)
-- **Image Processing**: OpenCV, Pillow
-- **Data Analysis**: NumPy, Pandas
-- **Visualization**: Matplotlib
-- **Packaging**: zipfile, shutil
-- **Deployment**: Streamlit Cloud
+- **Image Processing**: OpenCV, PIL
+- **Data Handling**: Pandas, NumPy
+- **Charting**: Matplotlib
+- **Packaging**: ZipFile, Shutil
 
 ---
 
-## 📸 Sample Output
+## 🌍 Use Cases
 
-Example summary after image upload:
-
-- ✅ Trees Detected: 42  
-- 📐 Average Canopy Area: 611,000 px²  
-- 🌿 Estimated Total CO₂ Sequestration: 860 kg/year  
-- 📊 Size Distribution Pie Chart  
-- 📥 ZIP file with `CSV + Cropped Images`
+- Estimating carbon capture from urban tree canopies
+- Environmental monitoring via satellite imagery
+- Eco-conscious urban planning
+- Research on vegetation distribution
 
 ---
 
-💬 About the App
-This project aims to demonstrate how AI + satellite imagery can help in environmental monitoring, urban forestry, and carbon sequestration estimation. The app is lightweight, fast, and optimized for practical use cases like:
+## 🎯 Sample Output
 
-Estimating green cover in urban areas
+- ✅ Total Trees Detected: 34  
+- 🌱 Total CO₂ Sequestration: 740 kg/year  
+- 📐 Average Canopy Area: 0.014 image ratio  
+- 📊 Size Distribution: Pie chart (S/M/L)  
+- 📥 ZIP file: Includes CSV + cropped images
 
-Supporting reforestation monitoring
+---
 
-Educational and research-based analysis
+## 🙌 Acknowledgements
 
-🤝 Acknowledgements
-Ultralytics for YOLOv8
+- [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics)
+- [Streamlit](https://streamlit.io/)
+- [OpenCV](https://opencv.org/)
+- [PIL (Pillow)](https://python-pillow.org/)
 
-Roboflow for dataset preparation
+---
 
-Streamlit for the UI framework
+### ❤️ Made with Love  
+<p align="center"><b>Made with ❤️ by Mayank Kumar Sharma</b><br>🌱 Empowering environmental insights through AI & satellite vision.</p>
 
-OpenCV, NumPy, Matplotlib, and the Python open-source ecosystem
-
-❤️ Made with Love
-<p align="center">
-  <b>Made with ❤️ by Mayank Kumar Sharma</b><br>
-  🌱 Empowering environmental insights through AI & satellite vision.
-</p>
 
