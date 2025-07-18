@@ -58,9 +58,10 @@ if uploaded_image:
     co2_total = 0
     class_counts = defaultdict(int)
 
-    size_map = {"S": (0, 400000), "M": (400000, 800000), "L": (800001, float("inf"))}
+    # New logic based on area ratio
     co2_map = {"S": 10, "M": 20, "L": 30}
     maturity_map = {"S": "likely young", "M": "semi-mature", "L": "mature"}
+    image_area = image_bgr.shape[0] * image_bgr.shape[1]
 
     crop_dir = "tree_crops"
     os.makedirs(crop_dir, exist_ok=True)
@@ -69,8 +70,16 @@ if uploaded_image:
         x1, y1, x2, y2 = box
         crop = image_bgr[y1:y2, x1:x2]
         bbox_area = (x2 - x1) * (y2 - y1)
+        bbox_ratio = bbox_area / image_area
 
-        size_class = "L" if bbox_area > 800000 else "M" if bbox_area > 400000 else "S"
+        # Device-independent size classification
+        if bbox_ratio < 0.01:
+            size_class = "S"
+        elif bbox_ratio < 0.03:
+            size_class = "M"
+        else:
+            size_class = "L"
+
         co2 = co2_map[size_class]
         maturity = maturity_map[size_class]
 
