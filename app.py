@@ -73,9 +73,9 @@ if uploaded_image:
         bbox_ratio = bbox_area / image_area
 
         # Device-independent size classification
-        if bbox_ratio <= 0.01:
+        if bbox_ratio < 0.01:
             size_class = "S"
-        elif bbox_ratio <= 0.02:
+        elif bbox_ratio < 0.02:
             size_class = "M"
         else:
             size_class = "L"
