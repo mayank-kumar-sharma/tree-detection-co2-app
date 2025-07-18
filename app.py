@@ -17,12 +17,11 @@ st.markdown("""
 Upload a **satellite image** to detect trees, classify them by size (S/M/L), estimate maturity and CO₂ sequestration, and get a CSV report with cropped images.
 
 ⚠️ **Note:** Works only with satellite imagery.
-
 ---
 """)
 
 # ===== Load YOLOv8 Detection Model =====
-model = YOLO("deetection.pt")  # Replace with your trained model name in root dir
+model = YOLO("deetection.pt")  # Replace with your trained model name
 
 # ===== Upload Image =====
 uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg", "png"])
@@ -30,7 +29,7 @@ uploaded_image = st.file_uploader("Upload a Satellite Image", type=["jpg", "jpeg
 if uploaded_image:
     image = Image.open(uploaded_image).convert("RGB")
 
-    # Resize only if image is too large, maintain quality (Pillow >=10)
+    # Resize only if image is too large
     max_dim = 10000
     if max(image.size) > max_dim:
         image.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
@@ -38,12 +37,20 @@ if uploaded_image:
     image_np = np.array(image)
     image_path = "uploaded_image.jpg"
     image.save(image_path)
-    st.image(image, caption="📷 Uploaded Satellite Image", use_container_width=True)
 
     # ===== Inference =====
     results = model(image_path)[0]
     boxes = results.boxes.xyxy.cpu().numpy().astype(int)
-    image_bgr = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+
+    # ===== Draw Bounding Boxes =====
+    for box in boxes:
+        x1, y1, x2, y2 = box
+        cv2.rectangle(image_bgr, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+    # Convert back to RGB for display
+    image_with_boxes = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+    st.image(image_with_boxes, caption="🖼️ Image with Detected Trees", use_container_width=True)
 
     # ===== Size + CO2 Estimation =====
     output_data = []
@@ -51,7 +58,7 @@ if uploaded_image:
     co2_total = 0
     class_counts = defaultdict(int)
 
-    size_map = {"S": (0, 400000), "M": (400000, 800000), "L": (800001, float("inf"))}  # Adjusted for better accuracy
+    size_map = {"S": (0, 400000), "M": (400000, 800000), "L": (800001, float("inf"))}
     co2_map = {"S": 10, "M": 20, "L": 30}
     maturity_map = {"S": "likely young", "M": "semi-mature", "L": "mature"}
 
@@ -119,5 +126,6 @@ if uploaded_image:
 # ===== Footer =====
 st.markdown("---")
 st.markdown("<center>Made with ❤️ by Mayank Kumar Sharma</center>", unsafe_allow_html=True)
+
 
 
