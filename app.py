@@ -668,6 +668,111 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
+# ===== FACT TICKER — shows on every page (fully self-contained) =====
+st.markdown("""
+<div id="fsa-ticker-wrap" style="
+    background: linear-gradient(90deg, #0d2b1a 0%, #1a4a2e 50%, #0d2b1a 100%);
+    border-radius: 10px;
+    padding: 11px 24px;
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    min-height: 42px;
+    border: 1px solid #2d5a3d;
+">
+    <span style="
+        background: #2e7d52;
+        color: #a5d6a7;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    ">🌿 DID YOU KNOW</span>
+    <div id="fsa-ticker-text" style="
+        color: rgba(255,255,255,0.85);
+        font-size: 0.84rem;
+        font-weight: 400;
+        line-height: 1.4;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 1;
+        transform: translateX(0px);
+    ">Loading forest facts...</div>
+</div>
+
+<script>
+(function() {
+    var facts = [
+        "A single mature tropical tree absorbs approximately 22 kg of CO2 every year - silently, continuously, for free.",
+        "Earth has lost 46% of its trees since humans first appeared - that is over 3 trillion trees gone forever.",
+        "Forests cover 31% of Earth land area but absorb nearly 2.6 trillion kg of CO2 annually.",
+        "The voluntary carbon market is projected to grow from $2 billion today to over $50 billion by 2030.",
+        "YOLOv8 can detect individual tree canopies in a satellite image in under 3 seconds - replacing weeks of fieldwork.",
+        "REDD+ projects have protected over 80 million hectares of tropical forest since 2008.",
+        "One hectare of tropical forest stores the equivalent of 100-300 tonnes of carbon in its biomass.",
+        "Digital MRV can reduce the cost of forest monitoring by up to 90% compared to manual surveys.",
+        "Nature-based solutions could provide 30% of the emissions reductions needed to meet Paris Agreement targets.",
+        "Planting 10 billion trees per year could help stabilise global temperatures by sequestering 2.5 billion tonnes of CO2."
+    ];
+
+    var idx = 0;
+    var started = false;
+
+    function showFact(el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(18px)';
+        setTimeout(function() {
+            idx = (idx + 1) % facts.length;
+            el.textContent = facts[idx];
+            el.style.transition = 'none';
+            el.style.transform = 'translateX(-18px)';
+            el.style.opacity = '0';
+            setTimeout(function() {
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateX(0px)';
+            }, 40);
+        }, 500);
+    }
+
+    function startTicker(el) {
+        if (started) return;
+        started = true;
+        el.textContent = facts[0];
+        el.style.opacity = '1';
+        setInterval(function() { showFact(el); }, 4000);
+    }
+
+    function tryStart() {
+        var el = document.getElementById('fsa-ticker-text');
+        if (el) { startTicker(el); return; }
+        // Layer 1: MutationObserver
+        var obs = new MutationObserver(function() {
+            var el2 = document.getElementById('fsa-ticker-text');
+            if (el2) { obs.disconnect(); startTicker(el2); }
+        });
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+        // Layer 2: setTimeout safety nets
+        setTimeout(function() {
+            var el3 = document.getElementById('fsa-ticker-text');
+            if (el3) startTicker(el3);
+        }, 300);
+        setTimeout(function() {
+            var el4 = document.getElementById('fsa-ticker-text');
+            if (el4) startTicker(el4);
+        }, 800);
+    }
+
+    tryStart();
+})();
+</script>
+""", unsafe_allow_html=True)
+
 # ===================================================================
 # PAGE: HOME
 # ===================================================================
@@ -685,26 +790,79 @@ if page == "🏠  Home":
     </div>
     """, unsafe_allow_html=True)
 
-    # Stats row
+    # Stats row — animated counters (fully self-contained)
     st.markdown("""
-    <div class="stat-row">
+    <div class="stat-row" id="fsa-stat-row">
         <div class="stat-card">
-            <div class="stat-number">15B</div>
+            <div class="stat-number" id="fsa-c1">0</div>
             <div class="stat-label">Trees lost per year globally</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">2.6T</div>
+            <div class="stat-number" id="fsa-c2">0</div>
             <div class="stat-label">Tons CO₂ absorbed by forests annually</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">$2B+</div>
+            <div class="stat-number" id="fsa-c3">$0</div>
             <div class="stat-label">Nature-based carbon market size</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">30%</div>
+            <div class="stat-number" id="fsa-c4">0%</div>
             <div class="stat-label">Climate targets met via forests</div>
         </div>
     </div>
+
+    <script>
+    (function() {
+        var started = false;
+
+        function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+
+        function animateCounter(el, opts) {
+            var startTs = null;
+            var duration = opts.duration || 1600;
+            function step(ts) {
+                if (!startTs) startTs = ts;
+                var progress = Math.min((ts - startTs) / duration, 1);
+                var val = easeOut(progress) * opts.end;
+                var display = (opts.prefix || '');
+                display += opts.decimals ? val.toFixed(opts.decimals) : Math.floor(val).toLocaleString();
+                display += (opts.suffix || '');
+                el.textContent = display;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function runCounters() {
+            if (started) return true;
+            var c1 = document.getElementById('fsa-c1');
+            var c2 = document.getElementById('fsa-c2');
+            var c3 = document.getElementById('fsa-c3');
+            var c4 = document.getElementById('fsa-c4');
+            if (!c1 || !c2 || !c3 || !c4) return false;
+            started = true;
+            animateCounter(c1, { end: 15,  suffix: 'B',  duration: 1500 });
+            animateCounter(c2, { end: 2.6, decimals: 1, suffix: 'T',  duration: 1700 });
+            animateCounter(c3, { end: 2,   prefix: '$', suffix: 'B+', duration: 1400 });
+            animateCounter(c4, { end: 30,  suffix: '%', duration: 1600 });
+            return true;
+        }
+
+        function tryStart() {
+            if (runCounters()) return;
+            // Layer 1: MutationObserver — fires instantly when elements enter DOM
+            var obs = new MutationObserver(function() {
+                if (runCounters()) obs.disconnect();
+            });
+            obs.observe(document.documentElement, { childList: true, subtree: true });
+            // Layer 2: setTimeout safety net — catches any edge cases
+            setTimeout(function() { runCounters(); }, 300);
+            setTimeout(function() { runCounters(); }, 800);
+        }
+
+        tryStart();
+    })();
+    </script>
     """, unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
