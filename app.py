@@ -278,7 +278,7 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:12px 16px; font-size:0.74rem; color:rgba(255,255,255,0.25); border-top:1px solid rgba(255,255,255,0.07); line-height:1.7;">
         A climate initiative by<br>
-        <strong style="color:#a5d6a7;">Mayank · [Name 2] · [Name 3]</strong><br>
+        <strong style="color:#a5d6a7;">Mayank Kumar Sharma</strong><br>
         B.Tech AI & Data Science · CTAE Udaipur
     </div>
     """, unsafe_allow_html=True)
@@ -301,25 +301,96 @@ if page == "🏠  Home":
     </div>
     """, unsafe_allow_html=True)
 
+    # ── FACT TICKER ──
+    st.markdown("""
+    <div id="fact-ticker-wrap" style="
+        background: linear-gradient(90deg, #071a0e, #1b5e35, #071a0e);
+        border-radius: 12px; padding: 14px 24px; margin-bottom: 1.6rem;
+        display: flex; align-items: center; gap: 14px; overflow: hidden;
+        border: 1px solid #2d5a3d;">
+        <span style="
+            background: #a5d6a7; color: #071a0e; font-size: 0.68rem;
+            font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 3px 10px; border-radius: 50px; white-space: nowrap;">
+            🌿 DID YOU KNOW
+        </span>
+        <span id="ticker-text" style="
+            font-size: 0.9rem; color: rgba(255,255,255,0.88);
+            font-weight: 400; transition: opacity 0.6s ease;">
+        </span>
+    </div>
+    <script>
+    const facts = [
+        "🌳 The world has lost 46% of its trees since the dawn of human civilisation.",
+        "🛰️ Satellite-based dMRV can monitor forests 365 days a year at near-zero cost.",
+        "💨 Forests absorb roughly 2.6 trillion tons of CO₂ every single year.",
+        "🌍 Deforestation causes 23% of all global greenhouse gas emissions.",
+        "💰 The voluntary carbon market is projected to reach $50 billion by 2030.",
+        "🌱 Nature-based solutions can deliver 30% of climate targets needed by 2030.",
+        "🤖 YOLOv8 can detect hundreds of trees in a satellite image in under 3 seconds.",
+        "📉 Every minute, the world loses forest area equivalent to 40 football fields.",
+    ];
+    let idx = 0;
+    const el = document.getElementById('ticker-text');
+    function showFact() {
+        if (!el) return;
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = facts[idx % facts.length];
+            el.style.opacity = 1;
+            idx++;
+        }, 600);
+    }
+    showFact();
+    setInterval(showFact, 4000);
+    </script>
+    """, unsafe_allow_html=True)
+
+    # ── ANIMATED COUNTERS ──
     st.markdown("""
     <div class="stat-row">
         <div class="stat-card">
-            <div class="stat-number">15B</div>
+            <div class="stat-number" id="cnt-trees">0</div>
             <div class="stat-label">Trees lost per year globally</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">2.6T</div>
+            <div class="stat-number" id="cnt-co2">0</div>
             <div class="stat-label">Tons CO₂ absorbed by forests annually</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">$2B+</div>
+            <div class="stat-number" id="cnt-market">$0</div>
             <div class="stat-label">Nature-based carbon market size</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">30%</div>
+            <div class="stat-number" id="cnt-climate">0%</div>
             <div class="stat-label">Climate targets met via forests</div>
         </div>
     </div>
+
+    <script>
+    function animateCounter(id, start, end, duration, prefix, suffix, decimals) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        let startTime = null;
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = start + (end - start) * eased;
+            el.textContent = prefix + current.toFixed(decimals) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    // small delay so DOM is ready
+    setTimeout(() => {
+        animateCounter('cnt-trees',   0, 15,  1800, '',  'B', 0);
+        animateCounter('cnt-co2',     0, 2.6, 2000, '',  'T', 1);
+        animateCounter('cnt-market',  0, 2,   1600, '$', 'B+', 0);
+        animateCounter('cnt-climate', 0, 30,  1500, '',  '%', 0);
+    }, 300);
+    </script>
     """, unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
