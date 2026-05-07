@@ -295,13 +295,13 @@ if page == "🏠  Home":
         <div class="hero-title">Detecting Trees.<br><em>Quantifying Carbon.</em></div>
         <div class="hero-subtitle">
             ForestSense AI uses deep learning on satellite imagery to detect individual trees,
-            classify their size & maturity, and estimate CO₂ sequestration — enabling
+            classify their size &amp; maturity, and estimate CO₂ sequestration — enabling
             scalable, digital MRV for nature-based carbon projects.
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # ── FACT TICKER ──
+    # ── FACT TICKER — HTML + JS in ONE block ──
     st.markdown("""
     <div id="fact-ticker-wrap" style="
         background: linear-gradient(90deg, #071a0e, #1b5e35, #071a0e);
@@ -317,48 +317,50 @@ if page == "🏠  Home":
         <span id="ticker-text" style="
             font-size: 0.9rem; color: rgba(255,255,255,0.88);
             font-weight: 400; transition: opacity 0.6s ease;">
+            🌳 The world has lost 46% of its trees since the dawn of human civilisation.
         </span>
     </div>
     <script>
-    const facts = [
-        "🌳 The world has lost 46% of its trees since the dawn of human civilisation.",
-        "🛰️ Satellite-based dMRV can monitor forests 365 days a year at near-zero cost.",
-        "💨 Forests absorb roughly 2.6 trillion tons of CO₂ every single year.",
-        "🌍 Deforestation causes 23% of all global greenhouse gas emissions.",
-        "💰 The voluntary carbon market is projected to reach $50 billion by 2030.",
-        "🌱 Nature-based solutions can deliver 30% of climate targets needed by 2030.",
-        "🤖 YOLOv8 can detect hundreds of trees in a satellite image in under 3 seconds.",
-        "📉 Every minute, the world loses forest area equivalent to 40 football fields.",
-    ];
-    let idx = 0;
-    const el = document.getElementById('ticker-text');
-    function showFact() {
-        if (!el) return;
-        el.style.opacity = 0;
-        setTimeout(() => {
-            el.textContent = facts[idx % facts.length];
-            el.style.opacity = 1;
-            idx++;
-        }, 600);
-    }
-    showFact();
-    setInterval(showFact, 4000);
+    (function() {
+        var facts = [
+            "🌳 The world has lost 46% of its trees since the dawn of human civilisation.",
+            "🛰️ Satellite-based dMRV can monitor forests 365 days a year at near-zero cost.",
+            "💨 Forests absorb roughly 2.6 trillion tons of CO₂ every single year.",
+            "🌍 Deforestation causes 23% of all global greenhouse gas emissions.",
+            "💰 The voluntary carbon market is projected to reach $50 billion by 2030.",
+            "🌱 Nature-based solutions can deliver 30% of climate targets needed by 2030.",
+            "🤖 YOLOv8 can detect hundreds of trees in a satellite image in under 3 seconds.",
+            "📉 Every minute, the world loses forest area equivalent to 40 football fields."
+        ];
+        var idx = 1;
+        function showFact() {
+            var el = document.getElementById('ticker-text');
+            if (!el) return;
+            el.style.opacity = 0;
+            setTimeout(function() {
+                el.textContent = facts[idx % facts.length];
+                el.style.opacity = 1;
+                idx++;
+            }, 600);
+        }
+        setInterval(showFact, 4000);
+    })();
     </script>
     """, unsafe_allow_html=True)
 
-    # ── ANIMATED COUNTERS ──
+    # ── ANIMATED COUNTERS — HTML + JS in ONE block ──
     st.markdown("""
     <div class="stat-row">
         <div class="stat-card">
-            <div class="stat-number" id="cnt-trees">0</div>
+            <div class="stat-number" id="cnt-trees">0B</div>
             <div class="stat-label">Trees lost per year globally</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="cnt-co2">0</div>
+            <div class="stat-number" id="cnt-co2">0T</div>
             <div class="stat-label">Tons CO₂ absorbed by forests annually</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number" id="cnt-market">$0</div>
+            <div class="stat-number" id="cnt-market">$0B+</div>
             <div class="stat-label">Nature-based carbon market size</div>
         </div>
         <div class="stat-card">
@@ -368,28 +370,26 @@ if page == "🏠  Home":
     </div>
 
     <script>
-    function animateCounter(id, start, end, duration, prefix, suffix, decimals) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        let startTime = null;
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = start + (end - start) * eased;
-            el.textContent = prefix + current.toFixed(decimals) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
+    (function() {
+        function animateCounter(id, start, end, duration, prefix, suffix, decimals) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = start + (end - start) * eased;
+                el.textContent = prefix + current.toFixed(decimals) + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
         }
-        requestAnimationFrame(step);
-    }
-
-    // small delay so DOM is ready
-    setTimeout(() => {
         animateCounter('cnt-trees',   0, 15,  1800, '',  'B', 0);
         animateCounter('cnt-co2',     0, 2.6, 2000, '',  'T', 1);
         animateCounter('cnt-market',  0, 2,   1600, '$', 'B+', 0);
         animateCounter('cnt-climate', 0, 30,  1500, '',  '%', 0);
-    }, 300);
+    })();
     </script>
     """, unsafe_allow_html=True)
 
@@ -444,7 +444,7 @@ if page == "🏠  Home":
             <div class="compare-row"><span>🔄</span><span>Can be run weekly or monthly for continuous monitoring</span></div>
             <div class="compare-row"><span>💡</span><span>Near-zero marginal cost per additional image processed</span></div>
             <div class="compare-row"><span>🎯</span><span>Every individual tree detected and counted by YOLOv8</span></div>
-            <div class="compare-row"><span>🌱</span><span>Per-tree CO₂ estimate based on actual canopy size & maturity</span></div>
+            <div class="compare-row"><span>🌱</span><span>Per-tree CO₂ estimate based on actual canopy size &amp; maturity</span></div>
             <div class="compare-row"><span>📥</span><span>Automated CSV + cropped image report, download in one click</span></div>
         </div>
     </div>
@@ -561,7 +561,6 @@ elif page == "🌍  The Initiative":
     st.markdown('<div class="section-header">Why It Matters</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">The real-world impact of better forest monitoring</div>', unsafe_allow_html=True)
 
-
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""<div class="info-card">
@@ -639,7 +638,7 @@ elif page == "📘  MRV & Carbon Market":
             <div class="info-card-icon">📏</div>
             <div class="info-card-title">What is MRV?</div>
             <div class="info-card-text">
-                <strong>MRV — Monitoring, Reporting & Verification</strong> — is the framework used to
+                <strong>MRV — Monitoring, Reporting &amp; Verification</strong> — is the framework used to
                 measure how much CO₂ a carbon project actually removes or avoids.<br><br>
                 <strong>Monitoring:</strong> Continuously tracking emissions, biomass, or sequestration data.<br><br>
                 <strong>Reporting:</strong> Documenting findings in standardised formats accepted by registries
@@ -700,10 +699,10 @@ elif page == "📘  MRV & Carbon Market":
             <div class="info-card-text">
                 <strong>1.</strong> Project Developer designs the project<br>
                 <strong>2.</strong> Methodology defines measurement rules<br>
-                <strong>3.</strong> MRV collects & verifies data<br>
+                <strong>3.</strong> MRV collects &amp; verifies data<br>
                 <strong>4.</strong> VVB conducts third-party audit<br>
                 <strong>5.</strong> Registry issues the credits<br>
-                <strong>6.</strong> Buyer purchases & retires credits
+                <strong>6.</strong> Buyer purchases &amp; retires credits
             </div>
         </div>""", unsafe_allow_html=True)
 
