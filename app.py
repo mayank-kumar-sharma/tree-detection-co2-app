@@ -335,6 +335,302 @@ html, body, [class*="css"] {
     color: rgba(255,255,255,0.4) !important;
     margin-top: 4px;
 }
+
+/* ---- Before/After comparison ---- */
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e0ede6;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.compare-left {
+    background: #fafafa;
+    padding: 30px 28px;
+    border-right: 1px solid #e0ede6;
+}
+.compare-right {
+    background: linear-gradient(135deg, #f1f8f4, #e8f5e9);
+    padding: 30px 28px;
+}
+.compare-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+}
+.compare-label-before {
+    background: #fee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+.compare-label-after {
+    background: #e8f5e9;
+    color: #1b5e35;
+    border: 1px solid #c8e6c9;
+}
+.compare-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: #0d2b1a;
+    margin-bottom: 14px;
+}
+.compare-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+}
+.compare-icon-bad { color: #ef5350; font-size: 1rem; flex-shrink: 0; }
+.compare-icon-good { color: #43a047; font-size: 1rem; flex-shrink: 0; }
+
+/* ---- Initiative hero ---- */
+.initiative-hero {
+    background: linear-gradient(135deg, #021a0a 0%, #0d4020 40%, #1a6335 70%, #0d2b1a 100%);
+    border-radius: 24px;
+    padding: 72px 60px;
+    color: white;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.initiative-hero::before {
+    content: '🌍';
+    position: absolute;
+    font-size: 18rem;
+    opacity: 0.04;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.initiative-mission {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: white;
+    margin-bottom: 1.2rem;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.initiative-mission em {
+    color: #a5d6a7;
+    font-style: italic;
+}
+.initiative-tagline {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto 2rem;
+}
+.big-stat-strip {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+.big-stat-item {
+    text-align: center;
+}
+.big-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: #a5d6a7;
+    display: block;
+}
+.big-stat-desc {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    max-width: 120px;
+    display: block;
+    margin: 4px auto 0;
+    line-height: 1.4;
+}
+
+/* ---- Bold quote ---- */
+.bold-quote {
+    background: linear-gradient(135deg, #0d2b1a, #1a4a2e);
+    border-radius: 16px;
+    padding: 40px 44px;
+    margin: 2rem 0;
+    position: relative;
+}
+.bold-quote::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 6rem;
+    color: rgba(165,214,167,0.15);
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    line-height: 1;
+}
+.bold-quote-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: #e8f5e9;
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+.bold-quote-attr {
+    font-size: 0.8rem;
+    color: #a5d6a7;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+/* ---- Pillar card ---- */
+.pillar-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid #e0ede6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    margin-bottom: 1rem;
+    border-top: 4px solid #2e7d52;
+}
+.pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.pillar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: #0d2b1a;
+    margin-bottom: 8px;
+}
+.pillar-text {
+    font-size: 0.84rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* ---- Real-world context card ---- */
+.context-card {
+    background: linear-gradient(135deg, #0d2b1a, #1b5e35);
+    border-radius: 16px;
+    padding: 32px 36px;
+    color: white;
+    margin: 1.5rem 0;
+}
+.context-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: #a5d6a7;
+    margin-bottom: 6px;
+}
+.context-card-sub {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+}
+.context-equiv-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.context-equiv {
+    flex: 1;
+    min-width: 150px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+}
+.context-equiv-icon {
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.context-equiv-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: #a5d6a7;
+    display: block;
+}
+.context-equiv-desc {
+    font-size: 0.73rem;
+    color: rgba(255,255,255,0.55);
+    display: block;
+    margin-top: 3px;
+    line-height: 1.4;
+}
+
+/* ---- Next steps card ---- */
+.next-steps-card {
+    background: #f8fdf9;
+    border-radius: 14px;
+    padding: 28px 30px;
+    border: 1px solid #c8e6c9;
+    margin-top: 1.5rem;
+}
+.next-steps-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: #0d2b1a;
+    margin-bottom: 6px;
+}
+.next-steps-sub {
+    font-size: 0.82rem;
+    color: #888;
+    margin-bottom: 18px;
+}
+.next-step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8f5e9;
+}
+.next-step-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.next-step-num {
+    width: 28px;
+    height: 28px;
+    background: #1b5e35;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.next-step-text {
+    font-size: 0.86rem;
+    color: #444;
+    line-height: 1.6;
+}
+.next-step-text strong {
+    color: #1b5e35;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -350,7 +646,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["🏠  Home", "📘  MRV & Carbon Market", "🔬  How It Works", "📊  Sample Output", "🌳  Launch Tool"],
+        ["🏠  Home", "🌍  The Initiative", "📘  MRV & Carbon Market", "🔬  How It Works", "📊  Sample Output", "🌳  Launch Tool"],
         label_visibility="collapsed"
     )
 
@@ -445,6 +741,37 @@ if page == "🏠  Home":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
+    # ---- NEW: Before / After comparison ----
+    st.markdown('<div class="section-header">The Gap We\'re Filling</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subheader">Manual MRV vs ForestSense AI — side by side</div>', unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="compare-grid">
+        <div class="compare-left">
+            <span class="compare-label compare-label-before">❌ Before — Manual MRV</span>
+            <div class="compare-title">Traditional Forest Monitoring</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> Field teams walk plots for weeks — only 1–2 surveys per year</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> Counting is manual, error-prone, and sampled (not full coverage)</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> CO₂ estimated from species averages — not actual tree sizes</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> Deforestation events missed for months between surveys</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> High cost — $10–50 per hectare for field verification</div>
+            <div class="compare-item"><span class="compare-icon-bad">✗</span> No standardised digital output — data silos across projects</div>
+        </div>
+        <div class="compare-right">
+            <span class="compare-label compare-label-after">✅ After — ForestSense AI</span>
+            <div class="compare-title">AI-Powered Digital MRV</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> Satellite image processed in seconds — scalable to any area</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> YOLOv8 detects every individual tree canopy automatically</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> CO₂ estimated per-tree based on actual bounding box canopy size</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> Near-real-time monitoring enables rapid deforestation alerts</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> Fraction of the cost — one upload replaces weeks of fieldwork</div>
+            <div class="compare-item"><span class="compare-icon-good">✓</span> Structured CSV + cropped image output — registry-ready data</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
     # Solution
     st.markdown('<div class="section-header">The Solution</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">AI-powered digital MRV at satellite scale</div>', unsafe_allow_html=True)
@@ -477,6 +804,189 @@ if page == "🏠  Home":
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+# ===================================================================
+# PAGE: THE INITIATIVE  (NEW)
+# ===================================================================
+elif page == "🌍  The Initiative":
+
+    st.markdown("""
+    <div class="initiative-hero">
+        <div class="hero-badge" style="margin-bottom:1.6rem;">🌱 Our Mission · Our Vision · Our Why</div>
+        <div class="initiative-mission">
+            Making the planet cooler,<br><em>one tree at a time.</em>
+        </div>
+        <div class="initiative-tagline">
+            ForestSense AI isn't just a detection tool — it's a step toward a future where every tree 
+            on Earth is counted, monitored, and credited for the climate work it silently does every day.
+        </div>
+        <div class="big-stat-strip">
+            <div class="big-stat-item">
+                <span class="big-stat-num">46%</span>
+                <span class="big-stat-desc">of Earth's trees lost since humans appeared</span>
+            </div>
+            <div class="big-stat-item">
+                <span class="big-stat-num">3T</span>
+                <span class="big-stat-desc">trees remaining on Earth today</span>
+            </div>
+            <div class="big-stat-item">
+                <span class="big-stat-num">10B</span>
+                <span class="big-stat-desc">trees planted needed per year to stabilise climate</span>
+            </div>
+            <div class="big-stat-item">
+                <span class="big-stat-num">$0</span>
+                <span class="big-stat-desc">carbon revenue most small forest projects receive today</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Bold quote
+    st.markdown("""
+    <div class="bold-quote">
+        <div class="bold-quote-text">
+            "We can't protect what we can't measure. And right now, 
+            the world's most powerful carbon sink — its forests — 
+            is largely invisible to the systems that are supposed to save it."
+        </div>
+        <div class="bold-quote-attr">— The problem ForestSense AI was built to solve</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
+    # Why it matters
+    st.markdown('<div class="section-header">Why It Matters</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subheader">The emotional and scientific case for AI-powered forest monitoring</div>', unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        <div class="info-card">
+            <div class="info-card-icon">🔬</div>
+            <div class="info-card-title">The Science</div>
+            <div class="info-card-text">
+                Forests are the single largest land-based carbon sink on Earth, absorbing roughly 
+                <strong>2.6 trillion kg of CO₂ per year</strong>. A single mature tropical tree sequesters 
+                22 kg of carbon annually — quietly, continuously, for free.<br><br>
+                Yet the systems built to measure this absorption — manual MRV — are slow, patchy, 
+                and expensive. Most small reforestation projects never reach the verification stage 
+                because the cost of monitoring wipes out any carbon revenue.<br><br>
+                <strong>AI changes that equation entirely.</strong> What took a field team 3 weeks 
+                now takes a computer 3 seconds.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div class="info-card">
+            <div class="info-card-icon">💚</div>
+            <div class="info-card-title">The Human Story</div>
+            <div class="info-card-text">
+                Behind every carbon credit is a community — farmers in India planting trees on degraded 
+                land, tribal communities in the Amazon protecting ancestral forests, NGOs in Africa 
+                running school reforestation programs.<br><br>
+                These projects exist. The trees exist. But without affordable monitoring, 
+                <strong>they remain invisible to the carbon market</strong> — and their communities 
+                receive nothing for the climate work they do.<br><br>
+                ForestSense AI is about making the invisible visible. Giving every tree a digital 
+                identity. And making sure the people who grow and protect forests 
+                <strong>get paid for it.</strong>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
+    # Vision pillars
+    st.markdown('<div class="section-header">The Bigger Vision</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subheader">Scaling dMRV globally — from a college project to a planetary tool</div>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("""
+        <div class="pillar-card">
+            <div class="pillar-icon">🌐</div>
+            <div class="pillar-title">Open-Source Forest Monitoring</div>
+            <div class="pillar-text">
+                The vision is a freely available, open-source dMRV toolkit that any NGO, 
+                government, or researcher can deploy — removing the cost barrier to 
+                carbon market participation for small-scale forest projects worldwide.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div class="pillar-card">
+            <div class="pillar-icon">🤝</div>
+            <div class="pillar-title">Bridging AI & Carbon Markets</div>
+            <div class="pillar-text">
+                Carbon registries like Verra and Gold Standard are beginning to accept 
+                AI-verified data. ForestSense AI is positioned at that frontier — 
+                building the technical bridge between satellite intelligence and 
+                standardised credit issuance.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown("""
+        <div class="pillar-card">
+            <div class="pillar-icon">🛰️</div>
+            <div class="pillar-title">From Pixels to Policy</div>
+            <div class="pillar-text">
+                Data from tools like this can inform national forest inventories, 
+                REDD+ reporting, and NDC commitments under the Paris Agreement — 
+                turning satellite pixels into actionable climate policy at 
+                country scale.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
+    # Roadmap
+    st.markdown('<div class="section-header">Where This Goes Next</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subheader">The roadmap from MVP to global impact</div>', unsafe_allow_html=True)
+
+    roadmap = [
+        ("🌱", "v1.0 — Now", "Single-image tree detection, size classification, CO₂ estimation, CSV export. Built on YOLOv8, running on Streamlit. Proof of concept validated."),
+        ("🌿", "v2.0 — Next", "Multi-image batch processing, GeoTIFF support, GPS coordinate overlay, tree density heatmaps, species classification via transfer learning."),
+        ("🌳", "v3.0 — Scale", "Time-series monitoring (compare images across months), deforestation alert system, integration with Sentinel-2 satellite API for free imagery."),
+        ("🌍", "v4.0 — Market", "Carbon registry export format (Verra VCS methodology), project boundary polygon support, blockchain-anchored audit trail, API for third-party integrations."),
+    ]
+
+    for icon, stage, desc in roadmap:
+        st.markdown(f"""
+        <div class="step-card" style="border-left-color: #a5d6a7;">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="font-size:1.8rem;">{icon}</div>
+                <div>
+                    <div class="step-title">{stage}</div>
+                    <div class="step-text">{desc}</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
+    # Closing statement
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #e8f5e9, #f1f8f4); border-radius: 16px; padding: 40px 44px; border: 1px solid #c8e6c9; text-align:center; margin-top: 1rem;">
+        <div style="font-size: 2rem; margin-bottom: 12px;">🌳</div>
+        <div style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #0d2b1a; margin-bottom: 12px;">
+            Every tree deserves to be seen.
+        </div>
+        <div style="font-size: 0.9rem; color: #555; max-width: 520px; margin: 0 auto; line-height: 1.8;">
+            ForestSense AI was built by a student with a laptop, an open-source model, 
+            and the belief that technology should be in service of the planet. 
+            If this tool helps even one project get its carbon credits — it's done its job.
+        </div>
+        <div style="margin-top: 18px; font-size: 0.78rem; color: #888; font-style: italic;">
+            Built by Mayank Kumar Sharma · B.Tech AI & Data Science · CTAE Udaipur
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ===================================================================
 # PAGE: MRV & CARBON MARKET
@@ -658,6 +1168,49 @@ elif page == "🔬  How It Works":
     st.dataframe(df_table, use_container_width=True, hide_index=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+
+    # Model accuracy info
+    st.markdown('<div class="section-header">Model Accuracy & Confidence</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-subheader">What to expect from the YOLOv8 detection engine</div>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("""
+        <div class="info-card" style="text-align:center;">
+            <div class="info-card-icon">🎯</div>
+            <div class="info-card-title">Detection Confidence</div>
+            <div style="font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: #1b5e35; margin: 10px 0;">~0.5+</div>
+            <div class="info-card-text">YOLOv8 uses a default confidence threshold of 0.5. Detections below this are automatically filtered out, reducing false positives.</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div class="info-card" style="text-align:center;">
+            <div class="info-card-icon">✅</div>
+            <div class="info-card-title">Best Performance On</div>
+            <div class="info-card-text" style="margin-top:10px;">
+                🌳 Dense canopy satellite images<br><br>
+                🏔️ High-resolution aerial photography<br><br>
+                ☀️ Clear weather, low shadow imagery<br><br>
+                🌿 Tropical & subtropical forest types
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown("""
+        <div class="info-card" style="text-align:center;">
+            <div class="info-card-icon">⚠️</div>
+            <div class="info-card-title">Known Limitations</div>
+            <div class="info-card-text" style="margin-top:10px;">
+                🌫️ Low accuracy on cloudy or hazy images<br><br>
+                ❄️ Reduced performance on deciduous forest (bare canopy)<br><br>
+                📏 CO₂ estimates are conservative baselines, not species-specific<br><br>
+                🔭 Very small saplings may be missed at low resolution
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Tech Stack</div>', unsafe_allow_html=True)
 
     techs = ["YOLOv8 (Ultralytics)", "Streamlit", "OpenCV", "PIL / Pillow", "Pandas", "NumPy", "Matplotlib", "ZipFile", "Python 3.10+"]
@@ -747,6 +1300,41 @@ elif page == "📊  Sample Output":
             ax2.text(bar.get_x() + bar.get_width()/2., bar.get_height() + 5,
                      f'{val}', ha='center', va='bottom', fontsize=9, color='#1b5e35', fontweight='bold')
         st.pyplot(fig2, transparent=True)
+
+    # ---- NEW: Real-world CO₂ context card ----
+    st.markdown("""
+    <div class="context-card">
+        <div class="context-card-title">🌍 What does 740 kg CO₂/year actually mean?</div>
+        <div class="context-card-sub">Translating your forest's carbon output into everyday equivalents</div>
+        <div class="context-equiv-row">
+            <div class="context-equiv">
+                <span class="context-equiv-icon">🚗</span>
+                <span class="context-equiv-val">2,900 km</span>
+                <span class="context-equiv-desc">equivalent driving distance offset per year</span>
+            </div>
+            <div class="context-equiv">
+                <span class="context-equiv-icon">✈️</span>
+                <span class="context-equiv-val">1 flight</span>
+                <span class="context-equiv-desc">Delhi → Mumbai round trip carbon neutralised</span>
+            </div>
+            <div class="context-equiv">
+                <span class="context-equiv-icon">💡</span>
+                <span class="context-equiv-val">740 days</span>
+                <span class="context-equiv-desc">of average Indian household electricity use offset</span>
+            </div>
+            <div class="context-equiv">
+                <span class="context-equiv-icon">📱</span>
+                <span class="context-equiv-val">93,000</span>
+                <span class="context-equiv-desc">smartphone charges worth of carbon absorbed</span>
+            </div>
+            <div class="context-equiv">
+                <span class="context-equiv-icon">💰</span>
+                <span class="context-equiv-val">$11–$22</span>
+                <span class="context-equiv-desc">potential carbon credit value at $15–30/tonne VCM pricing</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
     st.markdown("**📋 Sample Tree Report (first 10 trees)**")
@@ -911,6 +1499,53 @@ elif page == "🌳  Launch Tool":
         os.remove(csv_path)
         os.remove(zip_path)
         os.remove(image_path)
+
+        # ---- NEW: What to do with this data ----
+        st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="next-steps-card">
+            <div class="next-steps-title">📋 What to do with this data</div>
+            <div class="next-steps-sub">Your detection results are the starting point — here's where they go next</div>
+            <div class="next-step-item">
+                <div class="next-step-num">1</div>
+                <div class="next-step-text">
+                    <strong>Download the CSV report</strong> — it contains per-tree size, maturity, CO₂, 
+                    and canopy area. This is your baseline dataset for the project area.
+                </div>
+            </div>
+            <div class="next-step-item">
+                <div class="next-step-num">2</div>
+                <div class="next-step-text">
+                    <strong>Cross-reference with GPS boundaries</strong> — overlay the image with your 
+                    project polygon in QGIS or Google Earth Engine to assign real-world coordinates to each tree.
+                </div>
+            </div>
+            <div class="next-step-item">
+                <div class="next-step-num">3</div>
+                <div class="next-step-text">
+                    <strong>Repeat monitoring over time</strong> — run the same image area through ForestSense AI 
+                    every 3–6 months and compare tree counts to detect growth, loss, or deforestation events.
+                </div>
+            </div>
+            <div class="next-step-item">
+                <div class="next-step-num">4</div>
+                <div class="next-step-text">
+                    <strong>Submit to a carbon registry</strong> — use this data as supporting evidence in a 
+                    VCS or Gold Standard project submission. Registries like <strong>Verra</strong> increasingly 
+                    accept dMRV data with appropriate methodology documentation.
+                </div>
+            </div>
+            <div class="next-step-item">
+                <div class="next-step-num">5</div>
+                <div class="next-step-text">
+                    <strong>Estimate carbon credit value</strong> — your {co2_total:.0f} kg/year 
+                    ({co2_total/1000:.3f} tonnes) × current VCM price (~$15–30/tonne) = 
+                    <strong>approximately ${co2_total/1000*15:.2f}–${co2_total/1000*30:.2f} in potential annual credit value</strong> 
+                    from this image area alone.
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     else:
         st.markdown("""
