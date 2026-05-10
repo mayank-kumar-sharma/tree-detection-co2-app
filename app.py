@@ -16,7 +16,7 @@ st.set_page_config(
     page_title="ForestSense AI | Tree Detection & Carbon MRV",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={"About": "ForestSense AI — Built by Mayank Kumar Sharma"}
+    menu_items={"About": "ForestSense AI — Tree Detection & Carbon MRV"}
 )
 
 # ===== GLOBAL CSS =====
@@ -405,15 +405,6 @@ html, body, [class*="css"] {
     position: relative;
     overflow: hidden;
 }
-.initiative-hero::before {
-    content: '🌍';
-    position: absolute;
-    font-size: 18rem;
-    opacity: 0.04;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-}
 .initiative-mission {
     font-family: 'DM Serif Display', serif;
     font-size: 2.6rem;
@@ -638,7 +629,6 @@ html, body, [class*="css"] {
 with st.sidebar:
     st.markdown("""
     <div class="sidebar-brand">
-        <div style="font-size:2.2rem; margin-bottom:6px;">🌳</div>
         <div class="sidebar-brand-title">ForestSense AI</div>
         <div class="sidebar-brand-sub">Tree Detection & Carbon MRV</div>
     </div>
@@ -646,7 +636,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["🏠  Home", "🌍  The Initiative", "📘  MRV & Carbon Market", "🔬  How It Works", "📊  Sample Output", "🌳  Launch Tool"],
+        ["Home", "The Initiative", "MRV & Carbon Market", "How It Works", "Sample Output", "Launch Tool"],
         label_visibility="collapsed"
     )
 
@@ -659,23 +649,14 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("""
-    <div style="padding: 12px 16px; font-size:0.75rem; color:rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.08); line-height:1.6;">
-        Made with ❤️ by<br>
-        <strong style="color:#a5d6a7;">Mayank Kumar Sharma</strong><br>
-        B.Tech AI & Data Science · CTAE Udaipur
-    </div>
-    """, unsafe_allow_html=True)
-
 # ===================================================================
 # PAGE: HOME
 # ===================================================================
-if page == "🏠  Home":
+if page == "Home":
 
     st.markdown("""
     <div class="hero-card">
-        <div class="hero-badge">🛰️ Satellite AI · Carbon MRV · Forest Intelligence</div>
+        <div class="hero-badge">Satellite AI · Carbon MRV · Forest Intelligence</div>
         <div class="hero-title">Detecting Trees.<br><em>Quantifying Carbon.</em></div>
         <div class="hero-subtitle">
             ForestSense AI uses deep learning on satellite imagery to detect individual trees, 
@@ -685,7 +666,6 @@ if page == "🏠  Home":
     </div>
     """, unsafe_allow_html=True)
 
-    # Stats row
     st.markdown("""
     <div class="stat-row">
         <div class="stat-card">
@@ -709,7 +689,6 @@ if page == "🏠  Home":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Problem statement
     st.markdown('<div class="section-header">The Problem</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">Why traditional forest monitoring falls short</div>', unsafe_allow_html=True)
 
@@ -717,7 +696,6 @@ if page == "🏠  Home":
     with col1:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🚶</div>
             <div class="info-card-title">Manual Field Surveys</div>
             <div class="info-card-text">Traditional tree counting requires teams on the ground — slow, expensive, and impossible at scale across thousands of hectares.</div>
         </div>
@@ -725,7 +703,6 @@ if page == "🏠  Home":
     with col2:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">📉</div>
             <div class="info-card-title">Inaccurate CO₂ Estimates</div>
             <div class="info-card-text">Without individual tree-level data, carbon estimates rely on broad averages — leading to inflated or under-reported credits that hurt market credibility.</div>
         </div>
@@ -733,7 +710,6 @@ if page == "🏠  Home":
     with col3:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">⏳</div>
             <div class="info-card-title">No Real-Time Monitoring</div>
             <div class="info-card-text">Carbon project monitoring is annual at best. Deforestation or tree loss goes undetected for months, invalidating credit claims retroactively.</div>
         </div>
@@ -741,14 +717,13 @@ if page == "🏠  Home":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # ---- NEW: Before / After comparison ----
     st.markdown('<div class="section-header">The Gap We\'re Filling</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">Manual MRV vs ForestSense AI — side by side</div>', unsafe_allow_html=True)
 
     st.markdown("""
     <div class="compare-grid">
         <div class="compare-left">
-            <span class="compare-label compare-label-before">❌ Before — Manual MRV</span>
+            <span class="compare-label compare-label-before">Before — Manual MRV</span>
             <div class="compare-title">Traditional Forest Monitoring</div>
             <div class="compare-item"><span class="compare-icon-bad">✗</span> Field teams walk plots for weeks — only 1–2 surveys per year</div>
             <div class="compare-item"><span class="compare-icon-bad">✗</span> Counting is manual, error-prone, and sampled (not full coverage)</div>
@@ -758,7 +733,7 @@ if page == "🏠  Home":
             <div class="compare-item"><span class="compare-icon-bad">✗</span> No standardised digital output — data silos across projects</div>
         </div>
         <div class="compare-right">
-            <span class="compare-label compare-label-after">✅ After — ForestSense AI</span>
+            <span class="compare-label compare-label-after">After — ForestSense AI</span>
             <div class="compare-title">AI-Powered Digital MRV</div>
             <div class="compare-item"><span class="compare-icon-good">✓</span> Satellite image processed in seconds — scalable to any area</div>
             <div class="compare-item"><span class="compare-icon-good">✓</span> YOLOv8 detects every individual tree canopy automatically</div>
@@ -772,7 +747,6 @@ if page == "🏠  Home":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Solution
     st.markdown('<div class="section-header">The Solution</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">AI-powered digital MRV at satellite scale</div>', unsafe_allow_html=True)
 
@@ -793,26 +767,25 @@ if page == "🏠  Home":
     with col2:
         st.markdown("""
         <div class="info-card" style="background: linear-gradient(135deg, #e8f5e9, #f1f8f4);">
-            <div class="info-card-icon">✅</div>
             <div class="info-card-title">What This Tool Does</div>
             <div class="info-card-text">
-                🛰️ Accepts satellite images<br><br>
-                🤖 Detects trees via YOLOv8<br><br>
-                📐 Classifies S / M / L by canopy ratio<br><br>
-                🌱 Estimates CO₂ sequestration<br><br>
-                📥 Exports CSV + cropped images
+                Accepts satellite images<br><br>
+                Detects trees via YOLOv8<br><br>
+                Classifies S / M / L by canopy ratio<br><br>
+                Estimates CO₂ sequestration<br><br>
+                Exports CSV + cropped images
             </div>
         </div>
         """, unsafe_allow_html=True)
 
 # ===================================================================
-# PAGE: THE INITIATIVE  (NEW)
+# PAGE: THE INITIATIVE
 # ===================================================================
-elif page == "🌍  The Initiative":
+elif page == "The Initiative":
 
     st.markdown("""
     <div class="initiative-hero">
-        <div class="hero-badge" style="margin-bottom:1.6rem;">🌱 Our Mission · Our Vision · Our Why</div>
+        <div class="hero-badge" style="margin-bottom:1.6rem;">Our Mission · Our Vision · Our Why</div>
         <div class="initiative-mission">
             Making the planet cooler,<br><em>one tree at a time.</em>
         </div>
@@ -841,7 +814,6 @@ elif page == "🌍  The Initiative":
     </div>
     """, unsafe_allow_html=True)
 
-    # Bold quote
     st.markdown("""
     <div class="bold-quote">
         <div class="bold-quote-text">
@@ -855,7 +827,6 @@ elif page == "🌍  The Initiative":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Why it matters
     st.markdown('<div class="section-header">Why It Matters</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">The emotional and scientific case for AI-powered forest monitoring</div>', unsafe_allow_html=True)
 
@@ -863,7 +834,6 @@ elif page == "🌍  The Initiative":
     with col1:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🔬</div>
             <div class="info-card-title">The Science</div>
             <div class="info-card-text">
                 Forests are the single largest land-based carbon sink on Earth, absorbing roughly 
@@ -880,7 +850,6 @@ elif page == "🌍  The Initiative":
     with col2:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">💚</div>
             <div class="info-card-title">The Human Story</div>
             <div class="info-card-text">
                 Behind every carbon credit is a community — farmers in India planting trees on degraded 
@@ -898,7 +867,6 @@ elif page == "🌍  The Initiative":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Vision pillars
     st.markdown('<div class="section-header">The Bigger Vision</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">Scaling dMRV globally — from a college project to a planetary tool</div>', unsafe_allow_html=True)
 
@@ -906,7 +874,6 @@ elif page == "🌍  The Initiative":
     with col1:
         st.markdown("""
         <div class="pillar-card">
-            <div class="pillar-icon">🌐</div>
             <div class="pillar-title">Open-Source Forest Monitoring</div>
             <div class="pillar-text">
                 The vision is a freely available, open-source dMRV toolkit that any NGO, 
@@ -918,7 +885,6 @@ elif page == "🌍  The Initiative":
     with col2:
         st.markdown("""
         <div class="pillar-card">
-            <div class="pillar-icon">🤝</div>
             <div class="pillar-title">Bridging AI & Carbon Markets</div>
             <div class="pillar-text">
                 Carbon registries like Verra and Gold Standard are beginning to accept 
@@ -931,7 +897,6 @@ elif page == "🌍  The Initiative":
     with col3:
         st.markdown("""
         <div class="pillar-card">
-            <div class="pillar-icon">🛰️</div>
             <div class="pillar-title">From Pixels to Policy</div>
             <div class="pillar-text">
                 Data from tools like this can inform national forest inventories, 
@@ -944,46 +909,34 @@ elif page == "🌍  The Initiative":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Roadmap
     st.markdown('<div class="section-header">Where This Goes Next</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">The roadmap from MVP to global impact</div>', unsafe_allow_html=True)
 
     roadmap = [
-        ("🌱", "v1.0 — Now", "Single-image tree detection, size classification, CO₂ estimation, CSV export. Built on YOLOv8, running on Streamlit. Proof of concept validated."),
-        ("🌿", "v2.0 — Next", "Multi-image batch processing, GeoTIFF support, GPS coordinate overlay, tree density heatmaps, species classification via transfer learning."),
-        ("🌳", "v3.0 — Scale", "Time-series monitoring (compare images across months), deforestation alert system, integration with Sentinel-2 satellite API for free imagery."),
-        ("🌍", "v4.0 — Market", "Carbon registry export format (Verra VCS methodology), project boundary polygon support, blockchain-anchored audit trail, API for third-party integrations."),
+        ("v1.0 — Now", "Single-image tree detection, size classification, CO₂ estimation, CSV export. Built on YOLOv8, running on Streamlit. Proof of concept validated."),
+        ("v2.0 — Next", "Multi-image batch processing, GeoTIFF support, GPS coordinate overlay, tree density heatmaps, species classification via transfer learning."),
+        ("v3.0 — Scale", "Time-series monitoring (compare images across months), deforestation alert system, integration with Sentinel-2 satellite API for free imagery."),
+        ("v4.0 — Market", "Carbon registry export format (Verra VCS methodology), project boundary polygon support, blockchain-anchored audit trail, API for third-party integrations."),
     ]
 
-    for icon, stage, desc in roadmap:
+    for stage, desc in roadmap:
         st.markdown(f"""
         <div class="step-card" style="border-left-color: #a5d6a7;">
-            <div style="display:flex; gap:14px; align-items:flex-start;">
-                <div style="font-size:1.8rem;">{icon}</div>
-                <div>
-                    <div class="step-title">{stage}</div>
-                    <div class="step-text">{desc}</div>
-                </div>
-            </div>
+            <div class="step-title">{stage}</div>
+            <div class="step-text">{desc}</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Closing statement
     st.markdown("""
     <div style="background: linear-gradient(135deg, #e8f5e9, #f1f8f4); border-radius: 16px; padding: 40px 44px; border: 1px solid #c8e6c9; text-align:center; margin-top: 1rem;">
-        <div style="font-size: 2rem; margin-bottom: 12px;">🌳</div>
         <div style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #0d2b1a; margin-bottom: 12px;">
             Every tree deserves to be seen.
         </div>
         <div style="font-size: 0.9rem; color: #555; max-width: 520px; margin: 0 auto; line-height: 1.8;">
-            ForestSense AI was built by a student with a laptop, an open-source model, 
-            and the belief that technology should be in service of the planet. 
+            ForestSense AI was built with the belief that technology should be in service of the planet. 
             If this tool helps even one project get its carbon credits — it's done its job.
-        </div>
-        <div style="margin-top: 18px; font-size: 0.78rem; color: #888; font-style: italic;">
-            Built by Mayank Kumar Sharma · B.Tech AI & Data Science · CTAE Udaipur
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -991,19 +944,17 @@ elif page == "🌍  The Initiative":
 # ===================================================================
 # PAGE: MRV & CARBON MARKET
 # ===================================================================
-elif page == "📘  MRV & Carbon Market":
+elif page == "MRV & Carbon Market":
 
     st.markdown('<div class="section-header">MRV, dMRV & the Carbon Market</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">The science and economics behind carbon credit verification</div>', unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # MRV
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">📏</div>
             <div class="info-card-title">What is MRV?</div>
             <div class="info-card-text">
                 <strong>MRV — Monitoring, Reporting & Verification</strong> — is the framework used to 
@@ -1020,16 +971,15 @@ elif page == "📘  MRV & Carbon Market":
     with col2:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🛰️</div>
             <div class="info-card-title">What is dMRV?</div>
             <div class="info-card-text">
                 <strong>dMRV — Digital MRV</strong> — replaces manual field surveys with remote sensing, 
                 AI, and satellite data for continuous, scalable monitoring.<br><br>
                 Instead of sending surveyors into forests once a year, dMRV uses:<br><br>
-                🛰️ <strong>Satellite imagery</strong> (Sentinel, Landsat, Planet)<br>
-                🤖 <strong>Deep learning models</strong> (YOLO, CNNs, transformers)<br>
-                📡 <strong>IoT sensors</strong> for soil, weather, and biomass<br>
-                🗺️ <strong>GIS platforms</strong> for spatial analysis<br><br>
+                <strong>Satellite imagery</strong> (Sentinel, Landsat, Planet)<br>
+                <strong>Deep learning models</strong> (YOLO, CNNs, transformers)<br>
+                <strong>IoT sensors</strong> for soil, weather, and biomass<br>
+                <strong>GIS platforms</strong> for spatial analysis<br><br>
                 ForestSense AI is a dMRV tool — it automates tree-level monitoring 
                 using computer vision on satellite images.
             </div>
@@ -1044,7 +994,6 @@ elif page == "📘  MRV & Carbon Market":
     with col1:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🌍</div>
             <div class="info-card-title">Voluntary Carbon Market (VCM)</div>
             <div class="info-card-text">
                 Companies and individuals voluntarily offset their emissions by purchasing carbon credits. 
@@ -1057,7 +1006,6 @@ elif page == "📘  MRV & Carbon Market":
     with col2:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🌿</div>
             <div class="info-card-title">Nature-Based Solutions (NbS)</div>
             <div class="info-card-text">
                 Forests, mangroves, wetlands, and soil absorb CO₂ naturally. Projects that protect or 
@@ -1070,7 +1018,6 @@ elif page == "📘  MRV & Carbon Market":
     with col3:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">🔄</div>
             <div class="info-card-title">Credit Lifecycle</div>
             <div class="info-card-text">
                 <strong>1. Project Developer</strong> designs the project<br>
@@ -1091,21 +1038,19 @@ elif page == "📘  MRV & Carbon Market":
     with col1:
         st.markdown("""
         <div class="info-card" style="background: linear-gradient(135deg, #0d2b1a, #1a4a2e); color: white;">
-            <div class="info-card-icon">🚀</div>
             <div class="info-card-title" style="color: #a5d6a7;">Key Trends</div>
             <div class="info-card-text" style="color: rgba(255,255,255,0.75);">
-                🌐 <strong style="color:#a5d6a7;">Hyperspectral satellites</strong> — tree species ID from orbit<br><br>
-                🤖 <strong style="color:#a5d6a7;">Foundation models</strong> — one model for all forest types<br><br>
-                ⛓️ <strong style="color:#a5d6a7;">Blockchain registries</strong> — tamper-proof credit issuance<br><br>
-                📡 <strong style="color:#a5d6a7;">Continuous monitoring</strong> — daily updates, not annual<br><br>
-                🔗 <strong style="color:#a5d6a7;">IoT + satellite fusion</strong> — ground truth at scale
+                <strong style="color:#a5d6a7;">Hyperspectral satellites</strong> — tree species ID from orbit<br><br>
+                <strong style="color:#a5d6a7;">Foundation models</strong> — one model for all forest types<br><br>
+                <strong style="color:#a5d6a7;">Blockchain registries</strong> — tamper-proof credit issuance<br><br>
+                <strong style="color:#a5d6a7;">Continuous monitoring</strong> — daily updates, not annual<br><br>
+                <strong style="color:#a5d6a7;">IoT + satellite fusion</strong> — ground truth at scale
             </div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
         <div class="info-card">
-            <div class="info-card-icon">📅</div>
             <div class="info-card-title">Timeline of dMRV Evolution</div>
         </div>
         """, unsafe_allow_html=True)
@@ -1129,14 +1074,13 @@ elif page == "📘  MRV & Carbon Market":
 # ===================================================================
 # PAGE: HOW IT WORKS
 # ===================================================================
-elif page == "🔬  How It Works":
+elif page == "How It Works":
 
     st.markdown('<div class="section-header">How ForestSense AI Works</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">From satellite image to carbon report in seconds</div>', unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Steps
     steps = [
         ("01", "Upload Satellite Image", "User uploads a high-resolution satellite or aerial image (JPG/PNG). The system supports images up to 10,000×10,000 px. Images are temporarily stored for inference and deleted after processing."),
         ("02", "YOLOv8 Tree Detection", "A custom-trained YOLOv8 model runs inference on the image. It detects individual tree canopies and outputs bounding box coordinates (x1, y1, x2, y2) for each detected tree. Bounding boxes are drawn on the image for visual confirmation."),
@@ -1169,7 +1113,6 @@ elif page == "🔬  How It Works":
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Model accuracy info
     st.markdown('<div class="section-header">Model Accuracy & Confidence</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">What to expect from the YOLOv8 detection engine</div>', unsafe_allow_html=True)
 
@@ -1177,7 +1120,6 @@ elif page == "🔬  How It Works":
     with col1:
         st.markdown("""
         <div class="info-card" style="text-align:center;">
-            <div class="info-card-icon">🎯</div>
             <div class="info-card-title">Detection Confidence</div>
             <div style="font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: #1b5e35; margin: 10px 0;">~0.5+</div>
             <div class="info-card-text">YOLOv8 uses a default confidence threshold of 0.5. Detections below this are automatically filtered out, reducing false positives.</div>
@@ -1186,26 +1128,24 @@ elif page == "🔬  How It Works":
     with col2:
         st.markdown("""
         <div class="info-card" style="text-align:center;">
-            <div class="info-card-icon">✅</div>
             <div class="info-card-title">Best Performance On</div>
             <div class="info-card-text" style="margin-top:10px;">
-                🌳 Dense canopy satellite images<br><br>
-                🏔️ High-resolution aerial photography<br><br>
-                ☀️ Clear weather, low shadow imagery<br><br>
-                🌿 Tropical & subtropical forest types
+                Dense canopy satellite images<br><br>
+                High-resolution aerial photography<br><br>
+                Clear weather, low shadow imagery<br><br>
+                Tropical & subtropical forest types
             </div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
         <div class="info-card" style="text-align:center;">
-            <div class="info-card-icon">⚠️</div>
             <div class="info-card-title">Known Limitations</div>
             <div class="info-card-text" style="margin-top:10px;">
-                🌫️ Low accuracy on cloudy or hazy images<br><br>
-                ❄️ Reduced performance on deciduous forest (bare canopy)<br><br>
-                📏 CO₂ estimates are conservative baselines, not species-specific<br><br>
-                🔭 Very small saplings may be missed at low resolution
+                Low accuracy on cloudy or hazy images<br><br>
+                Reduced performance on deciduous forest (bare canopy)<br><br>
+                CO₂ estimates are conservative baselines, not species-specific<br><br>
+                Very small saplings may be missed at low resolution
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -1220,15 +1160,14 @@ elif page == "🔬  How It Works":
 # ===================================================================
 # PAGE: SAMPLE OUTPUT
 # ===================================================================
-elif page == "📊  Sample Output":
+elif page == "Sample Output":
 
     st.markdown('<div class="section-header">Sample Output</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">What ForestSense AI generates from a satellite image</div>', unsafe_allow_html=True)
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    st.info("💡 This is a **demo output** using simulated data — representative of real results from a forested satellite image.")
+    st.info("This is a demo output using simulated data — representative of real results from a forested satellite image.")
 
-    # Metrics
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.markdown("""
@@ -1264,7 +1203,7 @@ elif page == "📊  Sample Output":
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("**🥧 Size Distribution**")
+        st.markdown("**Size Distribution**")
         fig, ax = plt.subplots(figsize=(5, 4), facecolor='none')
         sizes = [14, 12, 8]
         labels = ['Small (S)', 'Medium (M)', 'Large (L)']
@@ -1281,7 +1220,7 @@ elif page == "📊  Sample Output":
         st.pyplot(fig, transparent=True)
 
     with col2:
-        st.markdown("**📊 CO₂ by Size Class**")
+        st.markdown("**CO₂ by Size Class**")
         fig2, ax2 = plt.subplots(figsize=(5, 4), facecolor='none')
         classes = ['Small (S)', 'Medium (M)', 'Large (L)']
         co2_vals = [140, 240, 360]
@@ -1301,34 +1240,28 @@ elif page == "📊  Sample Output":
                      f'{val}', ha='center', va='bottom', fontsize=9, color='#1b5e35', fontweight='bold')
         st.pyplot(fig2, transparent=True)
 
-    # ---- NEW: Real-world CO₂ context card ----
     st.markdown("""
     <div class="context-card">
-        <div class="context-card-title">🌍 What does 740 kg CO₂/year actually mean?</div>
+        <div class="context-card-title">What does 740 kg CO₂/year actually mean?</div>
         <div class="context-card-sub">Translating your forest's carbon output into everyday equivalents</div>
         <div class="context-equiv-row">
             <div class="context-equiv">
-                <span class="context-equiv-icon">🚗</span>
                 <span class="context-equiv-val">2,900 km</span>
                 <span class="context-equiv-desc">equivalent driving distance offset per year</span>
             </div>
             <div class="context-equiv">
-                <span class="context-equiv-icon">✈️</span>
                 <span class="context-equiv-val">1 flight</span>
-                <span class="context-equiv-desc">Delhi → Mumbai round trip carbon neutralised</span>
+                <span class="context-equiv-desc">Delhi to Mumbai round trip carbon neutralised</span>
             </div>
             <div class="context-equiv">
-                <span class="context-equiv-icon">💡</span>
                 <span class="context-equiv-val">740 days</span>
                 <span class="context-equiv-desc">of average Indian household electricity use offset</span>
             </div>
             <div class="context-equiv">
-                <span class="context-equiv-icon">📱</span>
                 <span class="context-equiv-val">93,000</span>
                 <span class="context-equiv-desc">smartphone charges worth of carbon absorbed</span>
             </div>
             <div class="context-equiv">
-                <span class="context-equiv-icon">💰</span>
                 <span class="context-equiv-val">$11–$22</span>
                 <span class="context-equiv-desc">potential carbon credit value at $15–30/tonne VCM pricing</span>
             </div>
@@ -1337,7 +1270,7 @@ elif page == "📊  Sample Output":
     """, unsafe_allow_html=True)
 
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
-    st.markdown("**📋 Sample Tree Report (first 10 trees)**")
+    st.markdown("**Sample Tree Report (first 10 trees)**")
 
     sample_data = []
     import random
@@ -1355,13 +1288,12 @@ elif page == "📊  Sample Output":
 # ===================================================================
 # PAGE: LAUNCH TOOL
 # ===================================================================
-elif page == "🌳  Launch Tool":
+elif page == "Launch Tool":
 
     st.markdown('<div class="section-header">Tree Detection Tool</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subheader">Upload a satellite image to begin detection and CO₂ estimation</div>', unsafe_allow_html=True)
     st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
 
-    # Load model
     @st.cache_resource
     def load_model():
         return YOLO("deetection.pt")
@@ -1385,7 +1317,7 @@ elif page == "🌳  Launch Tool":
         image_path = "uploaded_image.jpg"
         image.save(image_path)
 
-        with st.spinner("🤖 Running YOLOv8 detection..."):
+        with st.spinner("Running YOLOv8 detection..."):
             results = model(image_path)[0]
 
         boxes = results.boxes.xyxy.cpu().numpy().astype(int)
@@ -1479,7 +1411,6 @@ elif page == "🌳  Launch Tool":
             df = pd.DataFrame(output_data)
             st.dataframe(df, use_container_width=True, hide_index=True)
 
-        # Download
         csv_path = "tree_report.csv"
         df.to_csv(csv_path, index=False)
         zip_path = "tree_report_package.zip"
@@ -1490,7 +1421,7 @@ elif page == "🌳  Launch Tool":
 
         with open(zip_path, "rb") as f:
             st.download_button(
-                "📥 Download Full Report (CSV + Cropped Trees)",
+                "Download Full Report (CSV + Cropped Trees)",
                 f, file_name="forestsense_report.zip",
                 use_container_width=True
             )
@@ -1500,11 +1431,10 @@ elif page == "🌳  Launch Tool":
         os.remove(zip_path)
         os.remove(image_path)
 
-        # ---- NEW: What to do with this data ----
         st.markdown('<hr class="green-divider">', unsafe_allow_html=True)
         st.markdown(f"""
         <div class="next-steps-card">
-            <div class="next-steps-title">📋 What to do with this data</div>
+            <div class="next-steps-title">What to do with this data</div>
             <div class="next-steps-sub">Your detection results are the starting point — here's where they go next</div>
             <div class="next-step-item">
                 <div class="next-step-num">1</div>
@@ -1550,7 +1480,6 @@ elif page == "🌳  Launch Tool":
     else:
         st.markdown("""
         <div class="info-card" style="text-align:center; padding: 50px; border: 2px dashed #c8e6c9;">
-            <div style="font-size:3rem; margin-bottom:16px;">🛰️</div>
             <div class="info-card-title" style="font-size:1.2rem;">Upload a satellite image to begin</div>
             <div class="info-card-text">Supported formats: JPG, JPEG, PNG · Max recommended: 10,000 × 10,000 px</div>
         </div>
